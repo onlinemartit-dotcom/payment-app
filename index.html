@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Auto Fetch Google Script Data</title>
+</head>
+<body>
+  <h1>Data from Google Apps Script</h1>
+  <pre id="output">Loading data...</pre>
+
+  <script>
+    const output = document.getElementById('output');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby7Lo-gO2xZE-q52UJC7JdJTX0v0jDDZPGmVl8KXB_NT2LvNocKYfAYoFNPpjAZhkquAA/exec';
+
+    // Fetch data automatically when page loads
+    window.onload = () => {
+      fetch(scriptURL)
+        .then(response => response.json())
+        .then(data => {
+          output.textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+          output.textContent = 'Error fetching data: ' + error;
+        });
+    };
+  </script>
+</body>
+</html>
