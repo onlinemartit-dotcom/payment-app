@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Auto Fetch from Google Apps Script</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 20px;
+      border-radius: 6px;
+      max-width: 600px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Data from Google Apps Script</h1>
+  <pre id="output">Loading data...</pre>
+
+  <script>
+    const output = document.getElementById('output');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyquNE6uC7QKLFQcbpcndwo4G6TZmhF9XY8XMXyAgAECtyi8Ly_QCxpvFi2GtDcH0FqFQ/exec?action=data';
+
+    window.onload = () => {
+      fetch(scriptURL)
+        .then(response => response.json())
+        .then(data => {
+          output.textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+          output.textContent = 'Error fetching data: ' + error;
+        });
+    };
+  </script>
+</body>
+</html>
